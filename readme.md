@@ -197,3 +197,22 @@
     ~~~~
     
 
+## 2. tar, zip 기반의 설치
+- root 계정 외 일반계정으로 설치 가능
+
+1. 설치 파일 다운로드
+    ~~~~
+    >wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
+    ~~~~
+
+2.파일 정상다운로드 확인
+    ~~~~
+    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
+    > shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
+    ~~~~
+
+3. 설치
+    ~~~~
+    > unzip elasticsearch-6.4.2.zip
+    > cd elasticsearch-6.4.2/ 
+    ~~~~
