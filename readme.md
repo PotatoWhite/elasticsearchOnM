@@ -121,6 +121,18 @@ Node 및 Shard의 동작 예시
     2. Elasticsearch Cluster가 일정 Shard를 새로 투입된 Node에 분배하여 두대의 
     3. 용량확장을 위해 두대 Node가 Indexing과 Query에 참여됨
 
+### Example
+1. Given: Single Node의 3개의 Shard로 클러스터 구성
+[Cluster]
+[Node1 [P0] [P1] [P2]]
 
 
+2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
+[Cluster]
+[Node1 [P0] [P1] [P2]]
 
+
+3.
+[Cluster]
+[Node1      [P1] [P2]]
+[Node1 [P0]          ]
