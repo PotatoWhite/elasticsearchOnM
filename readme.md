@@ -152,9 +152,9 @@
 - RPM Repository 등록 
   - 파일생성 /etc/yum.repos.d/elasticsearch.repo
 
-~~~~
-        > vi /etc/yum.repos.d/elasticsearch.repo
-~~~~
+    ~~~~
+    > vi /etc/yum.repos.d/elasticsearch.repo
+    ~~~~
 
 ~~~~
         [elasticsearch-6.x]
