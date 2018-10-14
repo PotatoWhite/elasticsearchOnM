@@ -146,3 +146,19 @@
 - Elasticsearch는 Java로 작성되었다. (JVM 필요)
 - Elasticsearch 의 지원 내역
   - https://www.elastic.co/support/matrix
+
+## RPM 설치
+- [참고] https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
+- RPM Repository 등록 
+  - 파일생성 /etc/yum.repos.d/elasticsearch.repo
+  - 내용
+  ```
+  [elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+```
