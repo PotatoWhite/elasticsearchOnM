@@ -156,7 +156,7 @@
         > vi /etc/yum.repos.d/elasticsearch.repo
 ~~~~
 
- ~~~~
+~~~~
         [elasticsearch-6.x]
         name=Elasticsearch repository for 6.x packages
         baseurl=https://artifacts.elastic.co/packages/6.x/yum
@@ -165,7 +165,7 @@
         enabled=1
         autorefresh=1
         type=rpm-md
- ~~~~
+~~~~
   - 설치    
         ~~~~
         > yum install elasticsearch
