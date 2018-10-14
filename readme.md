@@ -241,10 +241,8 @@
 
 ## Elasticsearch 실행확인
 ### 프로세스 확인
-    ~~~~
     > ps -ef | grep elasticsearch
-    ~~~~
-
+    
 ### 어플리케이션 반응확인
     ~~~~
     > curl localhost:9200
