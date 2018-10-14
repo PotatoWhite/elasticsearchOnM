@@ -16,6 +16,8 @@ Elasticsearch 소개
     - Elasticsearch는 Apache License 2.0을 따른다.
 
 
+
+
 ELK Stack
 ---------
 - 검색엔진인 Elasticsearch와 함께 Logstash, Kibana라는 제품을 함꼐 사용하는 것을 의미함
@@ -23,4 +25,6 @@ ELK Stack
     - Elasticsearch에 저장
     - Kibana를 통해 분석
 
-![ELK Stack](https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png)
+    <img width="800">
+    ![ELK Stack](https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png)
+    </img>
