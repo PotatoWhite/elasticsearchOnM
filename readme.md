@@ -9,9 +9,9 @@
 ------------------
 ## Elasticsearch 소개
 - License
+#
     - Elasticsearch는 Full-Text 검색엔진으로 Apache Software의 검색엔진 프로젝트인 Lucene을 기반으로 한다.
     - Lucene은 Doug Cutting에 의해 개발되었으며, Apache License를 따른다.  
-#
     - Elasticsearch는 Shay Banon이 Lucene기반으로 만든 검색엔진이다.
     - Elasticsearch는 Apache License 2.0을 따른다.  
 
