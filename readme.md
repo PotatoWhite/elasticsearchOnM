@@ -1,5 +1,5 @@
-# Elasticsearch 설치 및 운영환경 구성
 * * *
+# Elasticsearch 설치 및 운영환경 구성
 
 - 이 문서는 Elasticsearch의 설치 및 환경 구성을 통해 시스템 도입 및 확장 업무를 지원할 수 있게 하는 Quick Guide가 목표이다.
 - 본 문서의 기준은 Elasticsearch 6.4.2 를 기준으로 작성 되었다.
@@ -16,7 +16,6 @@
     - Elasticsearch는 Apache License 2.0을 따른다.
 
 
-* * *
 
 
 ## ELK Stack
@@ -27,7 +26,6 @@
     - Kibana를 통해 분석    
     <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
 
-* * *
 
 ## Elasticsearch의 용어 및 개념 정리
 -------------------------------
@@ -63,9 +61,6 @@
  - ES 6.x 이상은 Multi Type을 지원하지 않음
 
 
-
-
- * * *
 
 
 ### Cluster의 구성
@@ -116,7 +111,6 @@
 - 많은 수의 Segment Merge될 경우 검색의 효율이 저하 됨
 
 
-* * *
 ### Node 및 Shard의 동작 예시
 -----------------------
 #### 시나리오
