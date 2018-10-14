@@ -26,4 +26,4 @@ ELK Stack
     - Kibana를 통해 분석
 
     
-    ![ELK Stack](<img width="800">https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png</img>)
+    ![ELK Stack](https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png){: width="800"}
