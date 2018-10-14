@@ -240,19 +240,21 @@
 
 ## Elasticsearch 실행확인
 ### 프로세스 확인   
-~~~~
+    ~~~~
     > ps -ef | grep elasticsearch
     centos   28770     1 99 08:44 pts/0    00:00:15 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.io.tmpdir=/tmp/elasticsearch.r16fIGcy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=32 -XX:GCLogFileSize=64m -Des.path.home=/home/centos/elasticsearch-6.4.2 -Des.path.conf=/home/centos/elasticsearch-6.4.2/config -Des.distribution.flavor=default -Des.distribution.type=zip -cp /home/centos/elasticsearch-6.4.2/lib/* org.elasticsearch.bootstrap.Elasticsearch -d
-~~~~
-        
+    ~~~~
+
 ### 어플리케이션 반응확인    
+    ~~~~
     > curl localhost:9200
-    
+    ~~~~
+
 ### 로그 위치
-    
+    ~~~~
     RPM 설치 : /var/log/elasticsearch/elasticsearch.log
     소스 설치 : {install path}/logs/elasticsearch.log
-    
+    ~~~~
 
 * * *
 # Kibana 설치
@@ -299,15 +301,15 @@
 
 * * *
 # Elasticsearch 설정
-~~~~
-network.host: 0.0.0.0
-http.cors.enabled: true
-http.cors.allow-origin: "*"
-~~~~
+    ~~~~
+    network.host: 0.0.0.0
+    http.cors.enabled: true
+    http.cors.allow-origin: "*"
+    ~~~~
 
 # Kibana 설정
-~~~~
-server.host: "0.0.0.0"
-elasticsearch.url: "http://localhost:9200"
-kibana.index: ".kibana"
-~~~~
+    ~~~~
+    server.host: "0.0.0.0"
+    elasticsearch.url: "http://localhost:9200"
+    kibana.index: ".kibana"
+    ~~~~
