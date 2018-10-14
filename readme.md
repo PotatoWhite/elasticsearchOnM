@@ -30,6 +30,7 @@ ELK Stack
 Elasticsearch의 용어 및 개념 정리
 -------------------------------
 
+## Data 저장구조
 ### Document
  - JSON(Java Script Object Notation) 기반의 실제 Data를 의미하는 데이터를 가진 저장단위
  - Document ID를 통해 구분됨
@@ -59,5 +60,15 @@ Elasticsearch의 용어 및 개념 정리
  - 하나의 Index에 Document를 저장할 때 Type을 분리하여 Indexing 할 수 있음
  - ES 6.x 이상은 Multi Type을 지원하지 않음
 
+## System 구성 구조
 ### Cluster
- -
+ - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
+ - Cluster별 고유의 cluster_name과 cluster_uuid를 갖음
+
+### Node
+ - Cluster를 구성하는 ES프로세서 단위
+ - Master, Data, Client, All Node로 구분
+    - Master Node : 클러스터 구성의 기준, Node들의 H/C
+    - Data Node : 실제 Data가 적재됨, Client의 요청에 Data를 반환
+    - Client Node : 외부의 쿼리만 받는 Node로 부하 분산을 위해 사용됨(Master나 Data 또한 외부 쿼리 요청을 받을 수는 있음)
+    - All Node : Master와 Data를 동시에 사용하는 노드(확장이 거의 없을 경우 사용됨)
