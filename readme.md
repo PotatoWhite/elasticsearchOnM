@@ -109,4 +109,18 @@ Elasticsearch의 용어 및 개념 정리
 - Indexing시에 Primary Shard의 복제 과정이 추가되기 때문에 I/O가 두배로 발생함
 - 디스크 볼륨도 실제 Document보다 두배 필요(일반적으로 가용 Disk의 40%만 사용가능)
 
+* * *
+Node 및 Shard의 동작 예시
+-----------------------
+## 시나리오
+### Case 01
+1. Given: Single Node의 3개의 Shard로 클러스터 구성
+2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
+3. Then:
+    1. Cluster에 동일한 설정의 Node 추가
+    2. Elasticsearch Cluster가 일정 Shard를 새로 투입된 Node에 분배하여 두대의 
+    3. 용량확장을 위해 두대 Node가 Indexing과 Query에 참여됨
+
+
+
 
