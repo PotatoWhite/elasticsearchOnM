@@ -5,6 +5,7 @@ Elasticsearch 설치 및 운영환경 구성
 - 본 문서의 기준은 Elasticsearch 6.4.2 를 기준으로 작성 되었다.
 
 
+* * *
 
 Elasticsearch 소개
 ------------------
@@ -16,6 +17,7 @@ Elasticsearch 소개
     - Elasticsearch는 Apache License 2.0을 따른다.
 
 
+* * *
 
 
 ELK Stack
@@ -26,6 +28,7 @@ ELK Stack
     - Kibana를 통해 분석    
     <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
 
+* * *
 
 Elasticsearch의 용어 및 개념 정리
 -------------------------------
@@ -59,6 +62,12 @@ Elasticsearch의 용어 및 개념 정리
  - RDB의 Table과 유사하게 생각할 수 있음
  - 하나의 Index에 Document를 저장할 때 Type을 분리하여 Indexing 할 수 있음
  - ES 6.x 이상은 Multi Type을 지원하지 않음
+
+
+
+
+ * * *
+
 
 ## System 구성 구조
 ### Cluster
