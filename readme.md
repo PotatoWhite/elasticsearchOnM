@@ -152,7 +152,12 @@
 - RPM Repository 등록 
   - 파일생성 /etc/yum.repos.d/elasticsearch.repo
   - 내용
-~~~~[elasticsearch-6.x]
+~~~~
+> vi /etc/yum.repos.d/elasticsearch.repo
+~~~~
+
+~~~~
+[elasticsearch-6.x]
 name=Elasticsearch repository for 6.x packages
 baseurl=https://artifacts.elastic.co/packages/6.x/yum
 gpgcheck=1
@@ -162,3 +167,6 @@ autorefresh=1
 type=rpm-md
 ~~~~
     
+~~~~
+> yum install elasticsearch
+~~~~
