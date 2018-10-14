@@ -22,7 +22,7 @@
     - Logstash와 Beats를 통해 Data 수집
     - Elasticsearch에 저장
     - Kibana를 통해 분석    
-    <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
+    <center$<img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" $</center$
 
   
     
@@ -38,7 +38,7 @@
 ### 2. JSON(Java Script Object Notation)
  - JSON은 널리 사용하는 경량데이터 구조
  - Key:Value 형태
-    <pre><code>
+    <pre$<code$
     {
         "name":"Potato",
         "address":{
@@ -46,7 +46,7 @@
             "country":"ROK"
         }
     }
-    </code></pre>
+    </code$</pre$
 
 ### 3. INDEX
  - Document들의 모음, 여러 Document들을 하나의 Index로 적재됨
@@ -63,8 +63,8 @@
 
 ----------------------
 ## Cluster의 구성
-- 외부에서 내부로 들여다보면 Cluster -> Node -> Shard -> Segment 로 구성됨 
-<center><img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/></center>
+- 외부에서 내부로 들여다보면 Cluster -$ Node -$ Shard -$ Segment 로 구성됨 
+<center$<img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/$</center$
 
 ### 1. Cluster
  - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
@@ -122,22 +122,22 @@
 
 #### Example (추후 이미지로 바꿀예정)
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
-<pre><code>[Cluster]
+<pre$<code$[Cluster]
 [Node1 [P0] [P1] [P2]]
-</code></pre>
+</code$</pre$
 
 
 2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
-<pre><code>[Cluster]
+<pre$<code$[Cluster]
 [Node1 [P0] [P1] [P2]]
-</code></pre>
+</code$</pre$
 
 
 3. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
-<pre><code>[Cluster]
+<pre$<code$[Cluster]
 [Node1      [P1] [P2]]
 [Node1 [P0]          ]
-</code></pre>
+</code$</pre$
 
 
 * * *
@@ -159,7 +159,7 @@
 1. 파일생성 /etc/yum.repos.d/elasticsearch.repo
 
     ~~~~
-    > vi /etc/yum.repos.d/elasticsearch.repo
+    $ vi /etc/yum.repos.d/elasticsearch.repo
     ~~~~
 
     ~~~~
@@ -177,36 +177,36 @@
 
 2. 설치    
     ~~~~
-    > yum install elasticsearch
+    $ yum install elasticsearch
     ~~~~
 
 3. 실행/중지
     ~~~~
-    > service elasticsearch start
-    > service elasticsearch stop
+    $ service elasticsearch start
+    $ service elasticsearch stop
     ~~~~
 
 
 #### 1.2 RPM Download하여 설치
 1. 설치 파일 다운로드
     ~~~~
-    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm
+    $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm
     ~~~~
 2. 파일 정상다운로드 확인
     ~~~~
-    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm.sha512
-    > shasum -a 512 -c elasticsearch-6.4.2.rpm.sha512 
+    $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm.sha512
+    $ shasum -a 512 -c elasticsearch-6.4.2.rpm.sha512 
     ~~~~
 
 3. 설치
     ~~~~
-    > sudo rpm --install elasticsearch-6.4.2.rpm
+    $ sudo rpm --install elasticsearch-6.4.2.rpm
     ~~~~
 
 4. 실행/중지
     ~~~~
-    > service elasticsearch start
-    > service elasticsearch stop
+    $ service elasticsearch start
+    $ service elasticsearch stop
     ~~~~
     
 
@@ -217,37 +217,37 @@
 
 1. 설치 파일 다운로드
     ~~~~
-    >wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
+    $wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
     ~~~~
 
 2. 파일 정상다운로드 확인
     ~~~~
-    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
-    > shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
+    $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
+    $ shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
     or
-    > sha512sum -c elasticsearch-6.4.2.zip.sha512 
+    $ sha512sum -c elasticsearch-6.4.2.zip.sha512 
     ~~~~
 
 3. 설치
     ~~~~
-    > unzip elasticsearch-6.4.2.zip
-    > cd elasticsearch-6.4.2/ 
+    $ unzip elasticsearch-6.4.2.zip
+    $ cd elasticsearch-6.4.2/ 
     ~~~~
 
 4. 실행/중지
-    > bin/elasticsearch -d
-    > kill -SIGTERM
+    $ bin/elasticsearch -d
+    $ kill -SIGTERM
 
 ## Elasticsearch 실행확인
 ### 프로세스 확인   
     ~~~~
-    > ps -ef | grep elasticsearch
+    $ ps -ef | grep elasticsearch
     centos   28770     1 99 08:44 pts/0    00:00:15 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.io.tmpdir=/tmp/elasticsearch.r16fIGcy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=32 -XX:GCLogFileSize=64m -Des.path.home=/home/centos/elasticsearch-6.4.2 -Des.path.conf=/home/centos/elasticsearch-6.4.2/config -Des.distribution.flavor=default -Des.distribution.type=zip -cp /home/centos/elasticsearch-6.4.2/lib/* org.elasticsearch.bootstrap.Elasticsearch -d
     ~~~~
 
 ### 어플리케이션 반응확인    
     ~~~~
-    > curl localhost:9200
+    $ curl localhost:9200
     ~~~~
 
 ### 로그 위치
@@ -270,7 +270,7 @@
 1. 파일생성 /etc/yum.repos.d/kibana.repo
 
     ~~~~
-    > vi /etc/yum.repos.d/kibana.repo
+    $ vi /etc/yum.repos.d/kibana.repo
     ~~~~
 
     ~~~~
@@ -288,13 +288,13 @@
 
 2. 설치    
     ~~~~
-    > yum install kibana
+    $ yum install kibana
     ~~~~
 
 3. 실행/중지
     ~~~~
-    > service kibana start
-    > service kibana stop
+    $ service kibana start
+    $ service kibana stop
     ~~~~    
 
 
