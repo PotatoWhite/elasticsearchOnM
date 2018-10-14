@@ -224,6 +224,8 @@
     ~~~~
     > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
     > shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
+    or
+    > sha512sum -c elasticsearch-6.4.2.zip.sha512 
     ~~~~
 
 3. 설치
@@ -294,3 +296,20 @@
     > service kibana start
     > service kibana stop
     ~~~~    
+
+
+
+* * *
+# Elasticsearch 설정
+~~~~
+network.host: 0.0.0.0
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+~~~~
+
+# Kibana 설정
+~~~~
+server.host: "0.0.0.0"
+elasticsearch.url: "http://localhost:9200"
+kibana.index: ".kibana"
+~~~~
