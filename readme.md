@@ -48,4 +48,16 @@ Elasticsearch의 용어 및 개념 정리
     }
     </code></pre>
 
-#
+### INDEX
+ - Document들의 모음, 여러 Document들을 하나의 Index로 적재됨
+ - Index가 사전에 정의될 수도 있으나, 특정한 구조가 필요하지 않을 경우 최초 데이터 인입시 생성
+
+
+### TYPE
+ - Index의 파티션으로 사용함
+ - RDB의 Table과 유사하게 생각할 수 있음
+ - 하나의 Index에 Document를 저장할 때 Type을 분리하여 Indexing 할 수 있음
+ - ES 6.x 이상은 Multi Type을 지원하지 않음
+
+### Cluster
+ -
