@@ -88,9 +88,25 @@ Elasticsearch의 용어 및 개념 정리
 ### Shard
 - Index가 Data를 나누어 저장하는 단위
 - Document를 실제 저장하는 단위
+- 각 Elasticsearch의 Shard는 Lucene Index
+- 단일 Lucene Index가 포함 할 수 있는 Document의 수는 2,147,483,519 건
+- 모든 Replica Shard는 병렬로 검색할 수있으므로 고가용성 및 검색 처리확장 지원
+
 
 - Shard를 지정하지 않을 경우 문제점 : Scaling
     - 단일 노드의 디스크 볼륨 크기의 유한성으로 더이상 저장 할 수 없는 순간이 오게 됨
     -  단일 노드의 유한한 CPU, 혹은 Memory 자원으로 Indexing이나 Searching의 성능 저하
 
 ### Primary Shard
+- Elasticsearch에 Document가 Indexing될 때 가장 처음 생성(원본)되는 Shard를 의미함
+- Shard별 Number를 통해 몇 번째 Shard인지 구분이 됨
+- 별도로 설정하지 않으면 5개의 Primary Shard를 기본으로 설정
+
+### Replica Shard
+- Replica Shard는 Indexing된 Primary Shard의 복제 본
+- Elasticsearch에 Primary Shard가 Indexing된 후, Primary Shard가 저장된 Data Node와 다른 Node에 복제 됨
+- 별도의 설정이 없으면 1개의 Replica Shard를 기본으로 설정
+- Indexing시에 Primary Shard의 복제 과정이 추가되기 때문에 I/O가 두배로 발생함
+- 디스크 볼륨도 실제 Document보다 두배 필요(일반적으로 가용 Disk의 40%만 사용가능)
+
+
