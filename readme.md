@@ -240,6 +240,7 @@
 
 ## Elasticsearch 실행확인
 ### 프로세스 확인   
+- ps 명령어를 이용해 실제 시작되고 있는지 확인 할 수 있다.
     ~~~~
     $ ps -ef | grep elasticsearch
     centos   28770     1 99 08:44 pts/0    00:00:15 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.io.tmpdir=/tmp/elasticsearch.r16fIGcy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=32 -XX:GCLogFileSize=64m -Des.path.home=/home/centos/elasticsearch-6.4.2 -Des.path.conf=/home/centos/elasticsearch-6.4.2/config -Des.distribution.flavor=default -Des.distribution.type=zip -cp /home/centos/elasticsearch-6.4.2/lib/* org.elasticsearch.bootstrap.Elasticsearch -d
