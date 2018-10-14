@@ -151,6 +151,7 @@
 - [참고] https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
 - RPM Repository 등록 
   - 파일생성 /etc/yum.repos.d/elasticsearch.repo
+  
         ~~~~
         > vi /etc/yum.repos.d/elasticsearch.repo
         ~~~~
