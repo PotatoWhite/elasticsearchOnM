@@ -69,9 +69,9 @@ Elasticsearch의 용어 및 개념 정리
  * * *
 
 
-## System 구성 구조
+## Cluster의 구성
 - 외부에서 내부로 들여다보면 Cluster -> Node -> Shard -> Segment 로 구성됨 
-<img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/>
+<center><img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/></center>
 
 ### Cluster
  - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
