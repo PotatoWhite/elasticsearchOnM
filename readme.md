@@ -31,12 +31,12 @@
 # Elasticsearch의 용어 및 개념 정리
 
 ## Data 저장구조
-### Document
+### 1. Document
  - JSON(Java Script Object Notation) 기반의 실제 Data를 의미하는 데이터를 가진 저장단위
  - Document ID를 통해 구분됨
  - 사용자가 생성이 가능하지만, 일반적으로 자동생성됨
 
-### JSON(Java Script Object Notation)
+### 2. JSON(Java Script Object Notation)
  - JSON은 널리 사용하는 경량데이터 구조
  - Key:Value 형태
     <pre><code>
@@ -49,12 +49,12 @@
     }
     </code></pre>
 
-### INDEX
+### 3. INDEX
  - Document들의 모음, 여러 Document들을 하나의 Index로 적재됨
  - Index가 사전에 정의될 수도 있으나, 특정한 구조가 필요하지 않을 경우 최초 데이터 인입시 생성
 
 
-### TYPE
+### 4. TYPE
  - Index의 파티션으로 사용함
  - RDB의 Table과 유사하게 생각할 수 있음
  - 하나의 Index에 Document를 저장할 때 Type을 분리하여 Indexing 할 수 있음
@@ -67,11 +67,11 @@
 - 외부에서 내부로 들여다보면 Cluster -> Node -> Shard -> Segment 로 구성됨 
 <center><img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/></center>
 
-### Cluster
+### 1. Cluster
  - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
  - Cluster별 고유의 cluster_name과 cluster_uuid를 갖음
 
-### Node
+### 2. Node
  - Cluster를 구성하는 ES프로세서 단위
  - Master, Data, Client, All Node로 구분
     - Master Node : 클러스터 구성의 기준, Node들의 H/C
@@ -79,7 +79,7 @@
     - Client Node : 외부의 쿼리만 받는 Node로 부하 분산을 위해 사용됨(Master나 Data 또한 외부 쿼리 요청을 받을 수는 있음)
     - All Node : Master와 Data를 동시에 사용하는 노드(확장이 거의 없을 경우 사용됨)
 
-### Shard
+### 3. Shard
 - Index가 Data를 나누어 저장하는 단위
 - Document를 실제 저장하는 단위
 - 각 Elasticsearch의 Shard는 Lucene Index
@@ -91,19 +91,19 @@
     - 단일 노드의 디스크 볼륨 크기의 유한성으로 더이상 저장 할 수 없는 순간이 오게 됨
     -  단일 노드의 유한한 CPU, 혹은 Memory 자원으로 Indexing이나 Searching의 성능 저하
 
-### Primary Shard
+#### 3.1 Primary Shard
 - Elasticsearch에 Document가 Indexing될 때 가장 처음 생성(원본)되는 Shard를 의미함
 - Shard별 Number를 통해 몇 번째 Shard인지 구분이 됨
 - 별도로 설정하지 않으면 5개의 Primary Shard를 기본으로 설정
 
-### Replica Shard
+#### 3.2 Replica Shard
 - Replica Shard는 Indexing된 Primary Shard의 복제 본
 - Elasticsearch에 Primary Shard가 Indexing된 후, Primary Shard가 저장된 Data Node와 다른 Node에 복제 됨
 - 별도의 설정이 없으면 1개의 Replica Shard를 기본으로 설정
 - Indexing시에 Primary Shard의 복제 과정이 추가되기 때문에 I/O가 두배로 발생함
 - 디스크 볼륨도 실제 Document보다 두배 필요(일반적으로 가용 Disk의 40%만 사용가능)
 
-### Segment
+### 4. Segment
 - Shard는 Segment로 이루어짐
 - Document가 Indexing될 때 System Buffer Cache 영역으로 적재됨
 - 이후 내부적으로 Refresh를 거치며 Commit Point를 생성하여 검색이 가능한 상태로 전환됨
@@ -111,7 +111,7 @@
 - 많은 수의 Segment Merge될 경우 검색의 효율이 저하 됨
 
 
-## Node 및 Shard의 동작 예시
+## (예시) Node 및 Shard의 동작 예시
 ### 시나리오
 #### Case 01
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
