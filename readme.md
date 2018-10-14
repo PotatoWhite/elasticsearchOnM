@@ -25,6 +25,5 @@ ELK Stack
     - Elasticsearch에 저장
     - Kibana를 통해 분석
 
-    <img width="800">
-    ![ELK Stack](https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png)
-    </img>
+    
+    ![ELK Stack](<img width="800">https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png</img>)
