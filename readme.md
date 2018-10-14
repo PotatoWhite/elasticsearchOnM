@@ -30,12 +30,12 @@ ELK Stack
 Elasticsearch의 용어 및 개념 정리
 -------------------------------
 
-# Document
+#### Document
  - JSON(Java Script Object Notation) 기반의 실제 Data를 의미하는 데이터를 가진 저장단위
  - Document ID를 통해 구분됨
  - 사용자가 생성이 가능하지만, 일반적으로 자동생성됨
 
-# JSON(Java Script Object Notation)
+#### JSON(Java Script Object Notation)
  - JSON은 널리 사용하는 경량데이터 구조
  - Key:Value 형태
     <pre><code>
@@ -47,3 +47,5 @@ Elasticsearch의 용어 및 개념 정리
         }
     }
     </code></pre>
+
+#
