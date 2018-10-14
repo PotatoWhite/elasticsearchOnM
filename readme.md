@@ -1,6 +1,5 @@
 * * *
-Elasticsearch 설치 및 운영환경 구성
-==================================
+# Elasticsearch 설치 및 운영환경 구성
 
 - 이 문서는 Elasticsearch의 설치 및 환경 구성을 통해 시스템 도입 및 확장 업무를 지원할 수 있게 하는 Quick Guide가 목표이다.
 - 본 문서의 기준은 Elasticsearch 6.4.2 를 기준으로 작성 되었다.  
@@ -123,22 +122,19 @@ Elasticsearch 설치 및 운영환경 구성
 
 #### Example (추후 이미지로 바꿀예정)
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
-<pre><code>
-[Cluster]
+<pre><code>[Cluster]
 [Node1 [P0] [P1] [P2]]
 </code></pre>
 
 
 2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
-<pre><code>
-[Cluster]
+<pre><code>[Cluster]
 [Node1 [P0] [P1] [P2]]
 </code></pre>
 
 
 3. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
-<pre><code>
-[Cluster]
+<pre><code>[Cluster]
 [Node1      [P1] [P2]]
 [Node1 [P0]          ]
 </code></pre>
@@ -147,3 +143,6 @@ Elasticsearch 설치 및 운영환경 구성
 * * *
 * * *
 # Elasticsearch 설치
+- Elasticsearch는 Java로 작성되었다. (JVM 필요)
+- Elasticsearch 의 지원 내역
+  - https://www.elastic.co/support/matrix
