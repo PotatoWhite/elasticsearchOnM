@@ -23,7 +23,5 @@ ELK Stack
 - 검색엔진인 Elasticsearch와 함께 Logstash, Kibana라는 제품을 함꼐 사용하는 것을 의미함
     - Logstash와 Beats를 통해 Data 수집
     - Elasticsearch에 저장
-    - Kibana를 통해 분석
-
-    
+    - Kibana를 통해 분석    
     <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
