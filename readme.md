@@ -25,3 +25,25 @@ ELK Stack
     - Elasticsearch에 저장
     - Kibana를 통해 분석    
     <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
+
+
+Elasticsearch의 용어 및 개념 정리
+-------------------------------
+
+# Document
+ - JSON(Java Script Object Notation) 기반의 실제 Data를 의미하는 데이터를 가진 저장단위
+ - Document ID를 통해 구분됨
+ - 사용자가 생성이 가능하지만, 일반적으로 자동생성됨
+
+# JSON(Java Script Object Notation)
+ - JSON은 널리 사용하는 경량데이터 구조
+ - Key:Value 형태
+    <pre><code>
+    {
+        "name":"Potato",
+        "address":{
+            "city":"Seoul",
+            "country":"ROK"
+        }
+    }
+    </code></pre>
