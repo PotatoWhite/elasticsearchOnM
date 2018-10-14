@@ -123,19 +123,22 @@ Node 및 Shard의 동작 예시
 
 ### Example
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
-
+<pre><code>
 [Cluster]
 [Node1 [P0] [P1] [P2]]
+</code></pre>
 
 
 2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
-
+<pre><code>
 [Cluster]
 [Node1 [P0] [P1] [P2]]
+</code></pre>
 
 
 3. Then
-
+<pre><code>
 [Cluster]
 [Node1      [P1] [P2]]
 [Node1 [P0]          ]
+</code></pre>
