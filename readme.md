@@ -22,7 +22,7 @@
     - Logstash와 Beats를 통해 Data 수집
     - Elasticsearch에 저장
     - Kibana를 통해 분석    
-    <center$<img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" $</center$
+    <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" /></center>
 
   
     
@@ -38,7 +38,7 @@
 ### 2. JSON(Java Script Object Notation)
  - JSON은 널리 사용하는 경량데이터 구조
  - Key:Value 형태
-    <pre$<code$
+    <pre><code>
     {
         "name":"Potato",
         "address":{
@@ -46,7 +46,7 @@
             "country":"ROK"
         }
     }
-    </code$</pre$
+    </code></pre>
 
 ### 3. INDEX
  - Document들의 모음, 여러 Document들을 하나의 Index로 적재됨
@@ -64,7 +64,7 @@
 ----------------------
 ## Cluster의 구성
 - 외부에서 내부로 들여다보면 Cluster -$ Node -$ Shard -$ Segment 로 구성됨 
-<center$<img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/$</center$
+<center><img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/></center>
 
 ### 1. Cluster
  - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
@@ -122,22 +122,22 @@
 
 #### Example (추후 이미지로 바꿀예정)
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
-<pre$<code$[Cluster]
+<pre><code>[Cluster]
 [Node1 [P0] [P1] [P2]]
-</code$</pre$
+</code></pre>
 
 
 2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
-<pre$<code$[Cluster]
+<pre><code>[Cluster]
 [Node1 [P0] [P1] [P2]]
-</code$</pre$
+</code></pre>
 
 
 3. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
-<pre$<code$[Cluster]
+<pre><code>[Cluster]
 [Node1      [P1] [P2]]
 [Node1 [P0]          ]
-</code$</pre$
+</code></pre>
 
 
 * * *
