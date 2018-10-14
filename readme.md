@@ -15,3 +15,12 @@ Elasticsearch 소개
     - Elasticsearch는 Shay Banon이 Lucene기반으로 만든 검색엔진이다.
     - Elasticsearch는 Apache License 2.0을 따른다.
 
+
+ELK Stack
+---------
+- 검색엔진인 Elasticsearch와 함께 Logstash, Kibana라는 제품을 함꼐 사용하는 것을 의미함
+    - Logstash와 Beats를 통해 Data 수집
+    - Elasticsearch에 저장
+    - Kibana를 통해 분석
+
+![ELK Stack][https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png]
