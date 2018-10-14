@@ -239,19 +239,21 @@
     $ kill -SIGTERM
 
 ## Elasticsearch 실행확인
-### 프로세스 확인   
+### 1. 프로세스 확인   
 - ps 명령어를 이용해 실제 시작되고 있는지 확인 할 수 있다.
     ~~~~
     $ ps -ef | grep elasticsearch
     centos   28770     1 99 08:44 pts/0    00:00:15 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.io.tmpdir=/tmp/elasticsearch.r16fIGcy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=32 -XX:GCLogFileSize=64m -Des.path.home=/home/centos/elasticsearch-6.4.2 -Des.path.conf=/home/centos/elasticsearch-6.4.2/config -Des.distribution.flavor=default -Des.distribution.type=zip -cp /home/centos/elasticsearch-6.4.2/lib/* org.elasticsearch.bootstrap.Elasticsearch -d
     ~~~~
 
-### 어플리케이션 반응확인    
+### 2. 어플리케이션 반응확인    
+- Elasticsearch의 기본 Port인 9200에 GET 요청을 하면 H/C 가능
     ~~~~
     $ curl localhost:9200
     ~~~~
 
 ### 로그 위치
+- 이상유무는 관련 로그를 확인
     ~~~~
     RPM 설치 : /var/log/elasticsearch/elasticsearch.log
     소스 설치 : {install path}/logs/elasticsearch.log
@@ -301,16 +303,21 @@
 
 
 * * *
-# Elasticsearch 설정
+# 설정 정보
+## Elasticsearch 설정
+- 기본설정 변경
     ~~~~
-    network.host: 0.0.0.0
-    http.cors.enabled: true
+    path.data: /var/lib/elasticsearch   <- 저장소 위치(실행계정이 해당 위치의 접근 권한이 있어야 함)
+    path.logs: /var/log/elasticsearch   <- 상동
+    network.host: 0.0.0.0               <- 외부 접근 IP설정(0.0.0.0은 실행시스템의 모든 IP)
+    http.cors.enabled: true             
     http.cors.allow-origin: "*"
     ~~~~
 
-# Kibana 설정
+## Kibana 설정
+- 기본설정 변경
     ~~~~
     server.host: "0.0.0.0"
-    elasticsearch.url: "http://localhost:9200"
+    elasticsearch.url: "http://localhost:9200"  <- Elasticsearch 주소
     kibana.index: ".kibana"
     ~~~~
