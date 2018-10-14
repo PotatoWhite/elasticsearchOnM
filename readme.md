@@ -149,14 +149,17 @@
 
 ## RPM 설치
 - [참고] https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
-- RPM Repository 등록 
-  - 파일생성 /etc/yum.repos.d/elasticsearch.repo
+
+#### RPM Repository 등록 설치
+1. 파일생성 /etc/yum.repos.d/elasticsearch.repo
 
     ~~~~
     > vi /etc/yum.repos.d/elasticsearch.repo
     ~~~~
 
     ~~~~
+    /etc/yum.repos.d/elasticsearch.repo에 아래 내용 추가
+
     [elasticsearch-6.x]
     name=Elasticsearch repository for 6.x packages
     baseurl=https://artifacts.elastic.co/packages/6.x/yum
@@ -167,7 +170,25 @@
     type=rpm-md
     ~~~~
 
-  - 설치    
+2. 설치    
     ~~~~
     > yum install elasticsearch
     ~~~~
+
+#### RPM Download하여 설치
+1. 설치 파일 다운로드
+    ~~~~
+    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm
+    ~~~~
+2. 파일 정상다운로드 확인
+    ~~~~
+    > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm.sha512
+    > shasum -a 512 -c elasticsearch-6.4.2.rpm.sha512 
+    ~~~~
+
+3. 설치
+    ~~~~
+    > sudo rpm --install elasticsearch-6.4.2.rpm
+    ~~~~
+    
+
