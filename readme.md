@@ -6,8 +6,8 @@
 
 
 
-## Elasticsearch 소개
 ------------------
+## Elasticsearch 소개
 - License
     - Elasticsearch는 Full-Text 검색엔진으로 Apache Software의 검색엔진 프로젝트인 Lucene을 기반으로 한다.
     - Lucene은 Doug Cutting에 의해 개발되었으며, Apache License를 따른다.
@@ -18,8 +18,8 @@
 
 
 
+------------------
 ## ELK Stack
----------
 - 검색엔진인 Elasticsearch와 함께 Logstash, Kibana라는 제품을 함꼐 사용하는 것을 의미함
     - Logstash와 Beats를 통해 Data 수집
     - Elasticsearch에 저장
@@ -27,8 +27,8 @@
     <center><img src="https://www.elastic.co/guide/en/beats/libbeat/current/images/beats-platform.png" width="600" ></center>
 
 
+------------------
 ## Elasticsearch의 용어 및 개념 정리
--------------------------------
 
 ### Data 저장구조
 #### Document
