@@ -91,7 +91,7 @@ Elasticsearch의 용어 및 개념 정리
 - 각 Elasticsearch의 Shard는 Lucene Index
 - 단일 Lucene Index가 포함 할 수 있는 Document의 수는 2,147,483,519 건
 - 모든 Replica Shard는 병렬로 검색할 수있으므로 고가용성 및 검색 처리확장 지원
-
+- 주의 : 한번 지정한 Shard는 변경하지 못함
 
 - Shard를 지정하지 않을 경우 문제점 : Scaling
     - 단일 노드의 디스크 볼륨 크기의 유한성으로 더이상 저장 할 수 없는 순간이 오게 됨
@@ -121,7 +121,7 @@ Node 및 Shard의 동작 예시
     2. Elasticsearch Cluster가 일정 Shard를 새로 투입된 Node에 분배하여 두대의 
     3. 용량확장을 위해 두대 Node가 Indexing과 Query에 참여됨
 
-### Example
+### Example (추후 이미지로 바꿀예정)
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
 <pre><code>
 [Cluster]
@@ -136,7 +136,7 @@ Node 및 Shard의 동작 예시
 </code></pre>
 
 
-3. Then
+3. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
 <pre><code>
 [Cluster]
 [Node1      [P1] [P2]]
