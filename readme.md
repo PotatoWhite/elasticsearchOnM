@@ -70,6 +70,9 @@ Elasticsearch의 용어 및 개념 정리
 
 
 ## System 구성 구조
+- 외부에서 내부로 들여다보면 Cluster -> Node -> Shard -> Segment 로 구성됨 
+<img src="https://raw.githubusercontent.com/exo-addons/exo-es-search/master/doc/images/image_05.png" width="600"/>
+
 ### Cluster
  - ES는 보통 Cluster로 구성 되면 하나 시앙의 노드로 구성됨, 사용자는 클러스터를 통해 데이터를 넣고 검색요청을 함
  - Cluster별 고유의 cluster_name과 cluster_uuid를 갖음
@@ -81,3 +84,13 @@ Elasticsearch의 용어 및 개념 정리
     - Data Node : 실제 Data가 적재됨, Client의 요청에 Data를 반환
     - Client Node : 외부의 쿼리만 받는 Node로 부하 분산을 위해 사용됨(Master나 Data 또한 외부 쿼리 요청을 받을 수는 있음)
     - All Node : Master와 Data를 동시에 사용하는 노드(확장이 거의 없을 경우 사용됨)
+
+### Shard
+- Index가 Data를 나누어 저장하는 단위
+- Document를 실제 저장하는 단위
+
+- Shard를 지정하지 않을 경우 문제점 : Scaling
+    - 단일 노드의 디스크 볼륨 크기의 유한성으로 더이상 저장 할 수 없는 순간이 오게 됨
+    -  단일 노드의 유한한 CPU, 혹은 Memory 자원으로 Indexing이나 Searching의 성능 저하
+
+### Primary Shard
