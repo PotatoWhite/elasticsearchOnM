@@ -147,10 +147,15 @@
 - Elasticsearch 의 지원 내역
   - https://www.elastic.co/support/matrix
 
-## RPM 설치
+## 1. RPM 설치
 - [참고] https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
+- RPM 설치 특징
+  - elasticsearch user, group 자동생성
+  - /etc/elasticsearch : config 생성
+  - /etc/sysconfig : 환경변수 파일
 
-#### RPM Repository 등록 설치
+
+#### 1.1 RPM Repository 등록 설치
 1. 파일생성 /etc/yum.repos.d/elasticsearch.repo
 
     ~~~~
@@ -175,7 +180,7 @@
     > yum install elasticsearch
     ~~~~
 
-#### RPM Download하여 설치
+#### 1.2 RPM Download하여 설치
 1. 설치 파일 다운로드
     ~~~~
     > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm
