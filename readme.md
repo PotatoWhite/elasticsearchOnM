@@ -180,6 +180,13 @@
     > yum install elasticsearch
     ~~~~
 
+3. 실행/중지
+    ~~~~
+    > service elasticsearch start
+    > service elasticsearch stop
+    ~~~~
+
+
 #### 1.2 RPM Download하여 설치
 1. 설치 파일 다운로드
     ~~~~
@@ -195,17 +202,25 @@
     ~~~~
     > sudo rpm --install elasticsearch-6.4.2.rpm
     ~~~~
+
+4. 실행/중지
+    ~~~~
+    > service elasticsearch start
+    > service elasticsearch stop
+    ~~~~
     
 
-## 2. tar, zip 기반의 설치
+## 2. 소스설치 : tar, zip 기반의 설치
+- [참고] https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-targz.html
 - root 계정 외 일반계정으로 설치 가능
+- 설치 후 압축 해제한 위치에 관련 파일이 모여있음
 
 1. 설치 파일 다운로드
     ~~~~
     >wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
     ~~~~
 
-2.파일 정상다운로드 확인
+2. 파일 정상다운로드 확인
     ~~~~
     > wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
     > shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
@@ -216,3 +231,66 @@
     > unzip elasticsearch-6.4.2.zip
     > cd elasticsearch-6.4.2/ 
     ~~~~
+
+4. 실행/중지
+    ~~~~
+    > bin/elasticsearch -d
+    ~~~~
+
+## Elasticsearch 실행확인
+### 프로세스 확인
+    ~~~~
+    > ps -ef | grep elasticsearch
+    ~~~~
+
+### 어플리케이션 반응확인
+    ~~~~
+    > curl localhost:9200
+    ~~~~
+
+### 로그 위치
+    ~~~~
+    RPM 설치 : /var/log/elasticsearch/elasticsearch.log
+    소스 설치 : {install path}/logs/elasticsearch.log
+    ~~~~
+
+* * *
+# Kibana 설치
+- Elasticsearch를 이용해 분석도구를 제공함
+- 예제 진행을 위해 Elasticsearch로 Query를 할 수 있는 도구로 사용 (Devtools)
+
+
+## 1. RPM 설치
+- [참고] https://www.elastic.co/guide/en/kibana/current/rpm.html
+
+
+#### 1.1 RPM Repository 등록 설치
+1. 파일생성 /etc/yum.repos.d/kibana.repo
+
+    ~~~~
+    > vi /etc/yum.repos.d/kibana.repo
+    ~~~~
+
+    ~~~~
+    /etc/yum.repos.d/kibana.repo에 아래 내용 추가
+
+    [kibana-6.x]
+    name=Kibana repository for 6.x packages
+    baseurl=https://artifacts.elastic.co/packages/6.x/yum
+    gpgcheck=1
+    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled=1
+    autorefresh=1
+    type=rpm-md
+    ~~~~
+
+2. 설치    
+    ~~~~
+    > yum install kibana
+    ~~~~
+
+3. 실행/중지
+    ~~~~
+    > service kibana start
+    > service kibana stop
+    ~~~~    
