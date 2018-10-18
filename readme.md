@@ -217,7 +217,7 @@
 
 1. 설치 파일 다운로드
     ~~~~
-    $wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
+    $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
     ~~~~
 
 2. 파일 정상다운로드 확인
