@@ -38,7 +38,7 @@
 ### 2. JSON(Java Script Object Notation)
  - JSON은 널리 사용하는 경량데이터 구조
  - Key:Value 형태
-    <pre><code>
+    ```
     {
         "name":"Potato",
         "address":{
@@ -46,7 +46,7 @@
             "country":"ROK"
         }
     }
-    </code></pre>
+    ```
 
 ### 3. INDEX
  - Document들의 모음, 여러 Document들을 하나의 Index로 적재됨
@@ -122,22 +122,23 @@
 
 #### Example (추후 이미지로 바꿀예정)
 1. Given: Single Node의 3개의 Shard로 클러스터 구성
-<pre><code>[Cluster]
-[Node1 [P0] [P1] [P2]]
-</code></pre>
+    ```
+    [Cluster]
+    [Node1 [P0] [P1] [P2]]
+    ```
 
+1. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
+    ```
+    [Cluster]
+    [Node1 [P0] [P1] [P2]]
+    ```
 
-2. When: Document가 늘어나서 모든 볼륨을 소진하여 모든 볼륨을 소진, 데이터 적재 불가
-<pre><code>[Cluster]
-[Node1 [P0] [P1] [P2]]
-</code></pre>
-
-
-3. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
-<pre><code>[Cluster]
-[Node1      [P1] [P2]]
-[Node1 [P0]          ]
-</code></pre>
+2. Then : 기본설정은 가장 큰 Shard를 신규 Node로 옮긴다.
+    ```
+    [Cluster]
+    [Node1      [P1] [P2]]
+    [Node1 [P0]          ]
+    ```
 
 
 * * *
@@ -158,11 +159,11 @@
 #### 1.1 RPM Repository 등록 설치
 1. 파일생성 /etc/yum.repos.d/elasticsearch.repo
 
-    ~~~~
+    ```
     $ vi /etc/yum.repos.d/elasticsearch.repo
-    ~~~~
+    ```
 
-    ~~~~
+    ```
     /etc/yum.repos.d/elasticsearch.repo에 아래 내용 추가
 
     [elasticsearch-6.x]
@@ -173,41 +174,41 @@
     enabled=1
     autorefresh=1
     type=rpm-md
-    ~~~~
+    ```
 
 2. 설치    
-    ~~~~
+    ```
     $ yum install elasticsearch
-    ~~~~
+    ```
 
 3. 실행/중지
-    ~~~~
+    ```
     $ service elasticsearch start
     $ service elasticsearch stop
-    ~~~~
+    ```
 
 
 #### 1.2 RPM Download하여 설치
 1. 설치 파일 다운로드
-    ~~~~
+    ```
     $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm
-    ~~~~
+    ```
 2. 파일 정상다운로드 확인
-    ~~~~
+    ```
     $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.rpm.sha512
     $ shasum -a 512 -c elasticsearch-6.4.2.rpm.sha512 
-    ~~~~
+    ```
 
 3. 설치
-    ~~~~
+    ```
     $ sudo rpm --install elasticsearch-6.4.2.rpm
-    ~~~~
+    ```
 
 4. 실행/중지
-    ~~~~
+    ```
     $ service elasticsearch start
     $ service elasticsearch stop
-    ~~~~
+    ```
     
 
 ## 2. 소스설치 : tar, zip 기반의 설치
@@ -216,23 +217,23 @@
 - 설치 후 압축 해제한 위치에 관련 파일이 모여있음
 
 1. 설치 파일 다운로드
-    ~~~~
+    ```
     $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip
-    ~~~~
+    ```
 
 2. 파일 정상다운로드 확인
-    ~~~~
+    ```
     $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.2.zip.sha512
     $ shasum -a 512 -c elasticsearch-6.4.2.zip.sha512 
     or
     $ sha512sum -c elasticsearch-6.4.2.zip.sha512 
-    ~~~~
+    ```
 
 3. 설치
-    ~~~~
+    ```
     $ unzip elasticsearch-6.4.2.zip
     $ cd elasticsearch-6.4.2/ 
-    ~~~~
+    ```
 
 4. 실행/중지
     $ bin/elasticsearch -d
@@ -241,23 +242,23 @@
 ## Elasticsearch 실행확인
 ### 1. 프로세스 확인   
 - ps 명령어를 이용해 실제 시작되고 있는지 확인 할 수 있다.
-    ~~~~
+    ```
     $ ps -ef | grep elasticsearch
     centos   28770     1 99 08:44 pts/0    00:00:15 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.io.tmpdir=/tmp/elasticsearch.r16fIGcy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=32 -XX:GCLogFileSize=64m -Des.path.home=/home/centos/elasticsearch-6.4.2 -Des.path.conf=/home/centos/elasticsearch-6.4.2/config -Des.distribution.flavor=default -Des.distribution.type=zip -cp /home/centos/elasticsearch-6.4.2/lib/* org.elasticsearch.bootstrap.Elasticsearch -d
-    ~~~~
+    ```
 
 ### 2. 어플리케이션 반응확인    
 - Elasticsearch의 기본 Port인 9200에 GET 요청을 하면 H/C 가능
-    ~~~~
+    ```
     $ curl localhost:9200
-    ~~~~
+    ```
 
 ### 로그 위치
 - 이상유무는 관련 로그를 확인
-    ~~~~
+    ```
     RPM 설치 : /var/log/elasticsearch/elasticsearch.log
     소스 설치 : {install path}/logs/elasticsearch.log
-    ~~~~
+    ```
 
 * * *
 # Kibana 설치
@@ -272,11 +273,11 @@
 #### 1.1 RPM Repository 등록 설치
 1. 파일생성 /etc/yum.repos.d/kibana.repo
 
-    ~~~~
+    ```
     $ vi /etc/yum.repos.d/kibana.repo
-    ~~~~
+    ```
 
-    ~~~~
+    ```
     /etc/yum.repos.d/kibana.repo에 아래 내용 추가
 
     [kibana-6.x]
@@ -287,18 +288,18 @@
     enabled=1
     autorefresh=1
     type=rpm-md
-    ~~~~
+    ```
 
 2. 설치    
-    ~~~~
+    ```
     $ yum install kibana
-    ~~~~
+    ```
 
 3. 실행/중지
-    ~~~~
+    ```
     $ service kibana start
     $ service kibana stop
-    ~~~~    
+    ```    
 
 
 
@@ -306,18 +307,127 @@
 # 설정 정보
 ## Elasticsearch 설정
 - 기본설정 변경
-    ~~~~
+    ```
     path.data: /var/lib/elasticsearch   <- 저장소 위치(실행계정이 해당 위치의 접근 권한이 있어야 함)
     path.logs: /var/log/elasticsearch   <- 상동
     network.host: 0.0.0.0               <- 외부 접근 IP설정(0.0.0.0은 실행시스템의 모든 IP)
     http.cors.enabled: true             
     http.cors.allow-origin: "*"
-    ~~~~
+    ```
 
 ## Kibana 설정
 - 기본설정 변경
-    ~~~~
+    ```
     server.host: "0.0.0.0"
     elasticsearch.url: "http://localhost:9200"  <- Elasticsearch 주소
     kibana.index: ".kibana"
-    ~~~~
+    ```
+
+
+* * *
+# 2. Elasticsearch 기본 동작
+- Index 생성 및 삭제 조회
+- Documents 색인 및 조회
+- Documents 갱신 및 삭제
+- Cluster 정보 확인하기
+
+## 2.1. Elasticsearch 기본동작 - Index 생성 및 삭제, 조회
+ 정의 : Index는 Document들의 모임              
+
+[Index를 생성하는 3가지 방법]
+- Index의 Settings를 정의
+- Index의 Mappings를 정의
+- 사용자 정의 된 Document를 Indexing  
+
+### 2.1.1. Index Settings
+- Static Index settings
+    - numbers_of_shards - Primary shard(PS) 수 설정(최초 설정 후 변경불가, default: 5 )                    
+
+- Dynamic Index settings
+    - number_of_replicas - Replica shard(RS) 수 설정
+    - refresh_interval - 검색 commit point를 만드는 refresh interval 설정
+    - index.routing.allocation.enable - index의 shard들이 라우팅 허용 설정
+
+#### 1. Put Method를 사용하여 Index 생성
+- [참고] kibana의 devtools를 이용하는 것이 편함
+- **pretty** 옵션은 기능상의 내용이 아니고 response를 보기편하게 출력하기 위한 것
+    ```
+    [Request]
+    $ curl -XPUT -H'Content-Type:application/json' http://localhost:9200/potato?pretty -d '{
+        "settings" : {
+            "index" : {
+                "number_of_shards" : 3, 
+                "number_of_replicas" : 1 
+            }
+        }
+    }'
+    
+    [Response]
+    {
+        "acknowledged" : true,
+        "shards_acknowledged" : true,
+        "index" : "potato"
+    }
+    ```
+  
+#### 2. Delete Method를 사용하여 Index 삭제
+- Elasticsearch의 상용 XPACK을 구매하지 않는 한 권한관리를 제공하지 않는다. 따라서 누구나 Delete 권한이 있어 위험한데, nginx등을 Elasticsearch 앞단에 두어 Method를 특정 IP에서만 허용하기도 한다.
+
+    ```
+    [Request]
+    $ curl -XDELETE -H'Content-Type:application/json' http://localhost:9200/potato?pretty
+    
+    [Response]
+    {
+        "acknowledged":true
+    }
+
+    ```
+
+#### 3. Head/Get Method를 사용하여 Index 존재여부 확인
+- 당연하겠지만, Head Method는 Get의 동작에 Body가 없이 Header만 반환한다.
+- 만일 'HTTP 200 OK'를 반환했다면, 존재하는 것이다.
+- 만일 'HTTP 404 Not Found'를 반환했다면, 존재하지 않는 것이다.
+
+    **1) Head**
+    ```
+    [Request]
+    $ curl -XHEAD --head -H'Content-Type:application/json' http://localhost:9200/potato?pretty
+
+    [Response : 존재 시]
+    HTTP/1.1 200 OK
+    content-type: application/json; charset=UTF-8
+    content-length: 373
+
+    [Response : 미존재 시]
+    HTTP/1.1 404 Not Found
+    content-type: application/json; charset=UTF-8
+    content-length: 500
+    ```
+
+    **2) GET**
+    ```
+    [Request]
+    $ curl -XGET -H'Content-Type:application/json' http://localhost:9200/potato?pretty
+
+    [Response : 존재 시]
+    {
+        "potato" : {
+            "aliases" : { },
+            "mappings" : { },
+            "settings" : {
+                "index" : {
+                    "creation_date" : "1539957003129",
+                    "number_of_shards" : "3",
+                    "number_of_replicas" : "1",
+                    "uuid" : "_sCHr8RcTU6yniuv4GhHUQ",
+                    "version" : {
+                    "created" : "6040199"
+                    },
+                    "provided_name" : "potato"
+                }
+            }
+        }
+    }
+
+    ```
