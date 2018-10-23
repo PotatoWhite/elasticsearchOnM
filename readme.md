@@ -329,15 +329,26 @@
 - Index 생성 및 삭제 조회
 - Documents 색인 및 조회
 - Documents 갱신 및 삭제
-- Cluster 정보 확인하기
+- Cluster 정보 확인하기당
 
 ## 2.1. Elasticsearch 기본동작 - Index 생성 및 삭제, 조회
  정의 : Index는 Document들의 모임              
 
-[Index를 생성하는 3가지 방법]
+**[Index를 생성하는 3가지 방법]**
 - Index의 Settings를 정의
 - Index의 Mappings를 정의
 - 사용자 정의 된 Document를 Indexing  
+
+**[Index 특징]**
+- Index 는 미리 정의된 Shard의 갯수에 의해 나뉘어짐 : **default=5**  
+  (결국 Shard는 Index 별로 설정해야 함)
+- 한전 지정한 Shard는 변경이 불가능 함
+- Document의 Id는 Random String이 자동으로 할당 되거나 사용자가 정의(입력) 해야 함
+- 사용자는 docid를 통해 문서를 가져올 수 있음 
+
+**[Shard 할당 알고리즘]**
+- shard = hash(routing) % number_of_primary_shards  
+  (ES 내부 해싱 알고리즘에 의해 문서의 id를 샤드 갯수로 나눈 나머지 값을 할당)
 
 ### 2.1.1. Index Settings
 - Static Index settings
@@ -389,7 +400,7 @@
 - 만일 'HTTP 200 OK'를 반환했다면, 존재하는 것이다.
 - 만일 'HTTP 404 Not Found'를 반환했다면, 존재하지 않는 것이다.
 
-    **1) Head**
+    **1) HEAD**
     ```
     [Request]
     $ curl -XHEAD --head -H'Content-Type:application/json' http://localhost:9200/potato?pretty
@@ -430,4 +441,602 @@
         }
     }
 
+    ```
+
+#### 4. _stats를 통한 인덱스 상태를 확인
+- 인덱스 내용이 추가/삭제 될 떄 분석됨
+- 사이즈, 문서수, 실행된 명령 정보
+  
+    **GET {index}/_stats** 
+    ```
+    [Request]
+    $ curl -XGET -H'Content-Type:application/json' http://localhost:9200/potato/_stats?pretty
+
+    [Response] : Elasticsearch 내부에 index가 있을 경우
+    {
+    "_shards" : {
+        "total" : 6,
+        "successful" : 3,
+        "failed" : 0
+    },
+    "_all" : {
+        "primaries" : {
+        "docs" : {
+            "count" : 0,
+            "deleted" : 0
+        },
+        "store" : {
+            "size_in_bytes" : 690
+        },
+        "indexing" : {
+            "index_total" : 0,
+            "index_time_in_millis" : 0,
+            "index_current" : 0,
+            "index_failed" : 0,
+            "delete_total" : 0,
+            "delete_time_in_millis" : 0,
+            "delete_current" : 0,
+            "noop_update_total" : 0,
+            "is_throttled" : false,
+            "throttle_time_in_millis" : 0
+        },
+        "get" : {
+            "total" : 0,
+            "time_in_millis" : 0,
+            "exists_total" : 0,
+            "exists_time_in_millis" : 0,
+            "missing_total" : 0,
+            "missing_time_in_millis" : 0,
+            "current" : 0
+        },
+        "search" : {
+            "open_contexts" : 0,
+            "query_total" : 0,
+            "query_time_in_millis" : 0,
+            "query_current" : 0,
+            "fetch_total" : 0,
+            "fetch_time_in_millis" : 0,
+            "fetch_current" : 0,
+            "scroll_total" : 0,
+            "scroll_time_in_millis" : 0,
+            "scroll_current" : 0,
+            "suggest_total" : 0,
+            "suggest_time_in_millis" : 0,
+            "suggest_current" : 0
+        },
+        "merges" : {
+            "current" : 0,
+            "current_docs" : 0,
+            "current_size_in_bytes" : 0,
+            "total" : 0,
+            "total_time_in_millis" : 0,
+            "total_docs" : 0,
+            "total_size_in_bytes" : 0,
+            "total_stopped_time_in_millis" : 0,
+            "total_throttled_time_in_millis" : 0,
+            "total_auto_throttle_in_bytes" : 62914560
+        },
+        "refresh" : {
+            "total" : 6,
+            "total_time_in_millis" : 0,
+            "listeners" : 0
+        },
+        "flush" : {
+            "total" : 0,
+            "periodic" : 0,
+            "total_time_in_millis" : 0
+        },
+        "warmer" : {
+            "current" : 0,
+            "total" : 3,
+            "total_time_in_millis" : 3
+        },
+        "query_cache" : {
+            "memory_size_in_bytes" : 0,
+            "total_count" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0,
+            "cache_size" : 0,
+            "cache_count" : 0,
+            "evictions" : 0
+        },
+        "fielddata" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0
+        },
+        "completion" : {
+            "size_in_bytes" : 0
+        },
+        "segments" : {
+            "count" : 0,
+            "memory_in_bytes" : 0,
+            "terms_memory_in_bytes" : 0,
+            "stored_fields_memory_in_bytes" : 0,
+            "term_vectors_memory_in_bytes" : 0,
+            "norms_memory_in_bytes" : 0,
+            "points_memory_in_bytes" : 0,
+            "doc_values_memory_in_bytes" : 0,
+            "index_writer_memory_in_bytes" : 0,
+            "version_map_memory_in_bytes" : 0,
+            "fixed_bit_set_memory_in_bytes" : 0,
+            "max_unsafe_auto_id_timestamp" : -1,
+            "file_sizes" : { }
+        },
+        "translog" : {
+            "operations" : 0,
+            "size_in_bytes" : 330,
+            "uncommitted_operations" : 0,
+            "uncommitted_size_in_bytes" : 330,
+            "earliest_last_modified_age" : 0
+        },
+        "request_cache" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0
+        },
+        "recovery" : {
+            "current_as_source" : 0,
+            "current_as_target" : 0,
+            "throttle_time_in_millis" : 0
+        }
+        },
+        "total" : {
+        "docs" : {
+            "count" : 0,
+            "deleted" : 0
+        },
+        "store" : {
+            "size_in_bytes" : 690
+        },
+        "indexing" : {
+            "index_total" : 0,
+            "index_time_in_millis" : 0,
+            "index_current" : 0,
+            "index_failed" : 0,
+            "delete_total" : 0,
+            "delete_time_in_millis" : 0,
+            "delete_current" : 0,
+            "noop_update_total" : 0,
+            "is_throttled" : false,
+            "throttle_time_in_millis" : 0
+        },
+        "get" : {
+            "total" : 0,
+            "time_in_millis" : 0,
+            "exists_total" : 0,
+            "exists_time_in_millis" : 0,
+            "missing_total" : 0,
+            "missing_time_in_millis" : 0,
+            "current" : 0
+        },
+        "search" : {
+            "open_contexts" : 0,
+            "query_total" : 0,
+            "query_time_in_millis" : 0,
+            "query_current" : 0,
+            "fetch_total" : 0,
+            "fetch_time_in_millis" : 0,
+            "fetch_current" : 0,
+            "scroll_total" : 0,
+            "scroll_time_in_millis" : 0,
+            "scroll_current" : 0,
+            "suggest_total" : 0,
+            "suggest_time_in_millis" : 0,
+            "suggest_current" : 0
+        },
+        "merges" : {
+            "current" : 0,
+            "current_docs" : 0,
+            "current_size_in_bytes" : 0,
+            "total" : 0,
+            "total_time_in_millis" : 0,
+            "total_docs" : 0,
+            "total_size_in_bytes" : 0,
+            "total_stopped_time_in_millis" : 0,
+            "total_throttled_time_in_millis" : 0,
+            "total_auto_throttle_in_bytes" : 62914560
+        },
+        "refresh" : {
+            "total" : 6,
+            "total_time_in_millis" : 0,
+            "listeners" : 0
+        },
+        "flush" : {
+            "total" : 0,
+            "periodic" : 0,
+            "total_time_in_millis" : 0
+        },
+        "warmer" : {
+            "current" : 0,
+            "total" : 3,
+            "total_time_in_millis" : 3
+        },
+        "query_cache" : {
+            "memory_size_in_bytes" : 0,
+            "total_count" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0,
+            "cache_size" : 0,
+            "cache_count" : 0,
+            "evictions" : 0
+        },
+        "fielddata" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0
+        },
+        "completion" : {
+            "size_in_bytes" : 0
+        },
+        "segments" : {
+            "count" : 0,
+            "memory_in_bytes" : 0,
+            "terms_memory_in_bytes" : 0,
+            "stored_fields_memory_in_bytes" : 0,
+            "term_vectors_memory_in_bytes" : 0,
+            "norms_memory_in_bytes" : 0,
+            "points_memory_in_bytes" : 0,
+            "doc_values_memory_in_bytes" : 0,
+            "index_writer_memory_in_bytes" : 0,
+            "version_map_memory_in_bytes" : 0,
+            "fixed_bit_set_memory_in_bytes" : 0,
+            "max_unsafe_auto_id_timestamp" : -1,
+            "file_sizes" : { }
+        },
+        "translog" : {
+            "operations" : 0,
+            "size_in_bytes" : 330,
+            "uncommitted_operations" : 0,
+            "uncommitted_size_in_bytes" : 330,
+            "earliest_last_modified_age" : 0
+        },
+        "request_cache" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0
+        },
+        "recovery" : {
+            "current_as_source" : 0,
+            "current_as_target" : 0,
+            "throttle_time_in_millis" : 0
+        }
+        }
+    },
+    "indices" : {
+        "potato" : {
+        "uuid" : "ZB8yxCJ3TcKxq_SyC9L0XQ",
+        "primaries" : {
+            "docs" : {
+            "count" : 0,
+            "deleted" : 0
+            },
+            "store" : {
+            "size_in_bytes" : 690
+            },
+            "indexing" : {
+            "index_total" : 0,
+            "index_time_in_millis" : 0,
+            "index_current" : 0,
+            "index_failed" : 0,
+            "delete_total" : 0,
+            "delete_time_in_millis" : 0,
+            "delete_current" : 0,
+            "noop_update_total" : 0,
+            "is_throttled" : false,
+            "throttle_time_in_millis" : 0
+            },
+            "get" : {
+            "total" : 0,
+            "time_in_millis" : 0,
+            "exists_total" : 0,
+            "exists_time_in_millis" : 0,
+            "missing_total" : 0,
+            "missing_time_in_millis" : 0,
+            "current" : 0
+            },
+            "search" : {
+            "open_contexts" : 0,
+            "query_total" : 0,
+            "query_time_in_millis" : 0,
+            "query_current" : 0,
+            "fetch_total" : 0,
+            "fetch_time_in_millis" : 0,
+            "fetch_current" : 0,
+            "scroll_total" : 0,
+            "scroll_time_in_millis" : 0,
+            "scroll_current" : 0,
+            "suggest_total" : 0,
+            "suggest_time_in_millis" : 0,
+            "suggest_current" : 0
+            },
+            "merges" : {
+            "current" : 0,
+            "current_docs" : 0,
+            "current_size_in_bytes" : 0,
+            "total" : 0,
+            "total_time_in_millis" : 0,
+            "total_docs" : 0,
+            "total_size_in_bytes" : 0,
+            "total_stopped_time_in_millis" : 0,
+            "total_throttled_time_in_millis" : 0,
+            "total_auto_throttle_in_bytes" : 62914560
+            },
+            "refresh" : {
+            "total" : 6,
+            "total_time_in_millis" : 0,
+            "listeners" : 0
+            },
+            "flush" : {
+            "total" : 0,
+            "periodic" : 0,
+            "total_time_in_millis" : 0
+            },
+            "warmer" : {
+            "current" : 0,
+            "total" : 3,
+            "total_time_in_millis" : 3
+            },
+            "query_cache" : {
+            "memory_size_in_bytes" : 0,
+            "total_count" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0,
+            "cache_size" : 0,
+            "cache_count" : 0,
+            "evictions" : 0
+            },
+            "fielddata" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0
+            },
+            "completion" : {
+            "size_in_bytes" : 0
+            },
+            "segments" : {
+            "count" : 0,
+            "memory_in_bytes" : 0,
+            "terms_memory_in_bytes" : 0,
+            "stored_fields_memory_in_bytes" : 0,
+            "term_vectors_memory_in_bytes" : 0,
+            "norms_memory_in_bytes" : 0,
+            "points_memory_in_bytes" : 0,
+            "doc_values_memory_in_bytes" : 0,
+            "index_writer_memory_in_bytes" : 0,
+            "version_map_memory_in_bytes" : 0,
+            "fixed_bit_set_memory_in_bytes" : 0,
+            "max_unsafe_auto_id_timestamp" : -1,
+            "file_sizes" : { }
+            },
+            "translog" : {
+            "operations" : 0,
+            "size_in_bytes" : 330,
+            "uncommitted_operations" : 0,
+            "uncommitted_size_in_bytes" : 330,
+            "earliest_last_modified_age" : 0
+            },
+            "request_cache" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0
+            },
+            "recovery" : {
+            "current_as_source" : 0,
+            "current_as_target" : 0,
+            "throttle_time_in_millis" : 0
+            }
+        },
+        "total" : {
+            "docs" : {
+            "count" : 0,
+            "deleted" : 0
+            },
+            "store" : {
+            "size_in_bytes" : 690
+            },
+            "indexing" : {
+            "index_total" : 0,
+            "index_time_in_millis" : 0,
+            "index_current" : 0,
+            "index_failed" : 0,
+            "delete_total" : 0,
+            "delete_time_in_millis" : 0,
+            "delete_current" : 0,
+            "noop_update_total" : 0,
+            "is_throttled" : false,
+            "throttle_time_in_millis" : 0
+            },
+            "get" : {
+            "total" : 0,
+            "time_in_millis" : 0,
+            "exists_total" : 0,
+            "exists_time_in_millis" : 0,
+            "missing_total" : 0,
+            "missing_time_in_millis" : 0,
+            "current" : 0
+            },
+            "search" : {
+            "open_contexts" : 0,
+            "query_total" : 0,
+            "query_time_in_millis" : 0,
+            "query_current" : 0,
+            "fetch_total" : 0,
+            "fetch_time_in_millis" : 0,
+            "fetch_current" : 0,
+            "scroll_total" : 0,
+            "scroll_time_in_millis" : 0,
+            "scroll_current" : 0,
+            "suggest_total" : 0,
+            "suggest_time_in_millis" : 0,
+            "suggest_current" : 0
+            },
+            "merges" : {
+            "current" : 0,
+            "current_docs" : 0,
+            "current_size_in_bytes" : 0,
+            "total" : 0,
+            "total_time_in_millis" : 0,
+            "total_docs" : 0,
+            "total_size_in_bytes" : 0,
+            "total_stopped_time_in_millis" : 0,
+            "total_throttled_time_in_millis" : 0,
+            "total_auto_throttle_in_bytes" : 62914560
+            },
+            "refresh" : {
+            "total" : 6,
+            "total_time_in_millis" : 0,
+            "listeners" : 0
+            },
+            "flush" : {
+            "total" : 0,
+            "periodic" : 0,
+            "total_time_in_millis" : 0
+            },
+            "warmer" : {
+            "current" : 0,
+            "total" : 3,
+            "total_time_in_millis" : 3
+            },
+            "query_cache" : {
+            "memory_size_in_bytes" : 0,
+            "total_count" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0,
+            "cache_size" : 0,
+            "cache_count" : 0,
+            "evictions" : 0
+            },
+            "fielddata" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0
+            },
+            "completion" : {
+            "size_in_bytes" : 0
+            },
+            "segments" : {
+            "count" : 0,
+            "memory_in_bytes" : 0,
+            "terms_memory_in_bytes" : 0,
+            "stored_fields_memory_in_bytes" : 0,
+            "term_vectors_memory_in_bytes" : 0,
+            "norms_memory_in_bytes" : 0,
+            "points_memory_in_bytes" : 0,
+            "doc_values_memory_in_bytes" : 0,
+            "index_writer_memory_in_bytes" : 0,
+            "version_map_memory_in_bytes" : 0,
+            "fixed_bit_set_memory_in_bytes" : 0,
+            "max_unsafe_auto_id_timestamp" : -1,
+            "file_sizes" : { }
+            },
+            "translog" : {
+            "operations" : 0,
+            "size_in_bytes" : 330,
+            "uncommitted_operations" : 0,
+            "uncommitted_size_in_bytes" : 330,
+            "earliest_last_modified_age" : 0
+            },
+            "request_cache" : {
+            "memory_size_in_bytes" : 0,
+            "evictions" : 0,
+            "hit_count" : 0,
+            "miss_count" : 0
+            },
+            "recovery" : {
+            "current_as_source" : 0,
+            "current_as_target" : 0,
+            "throttle_time_in_millis" : 0
+            }
+        }
+        }
+    }
+    }
+    ```
+
+#### 5. _segment/를 통한 인덱스 상태를 확인
+- Shards 및 Segments 정보 조회
+  
+    **GET {index}/_stats** 
+    ```
+    [Request]
+    $ curl -XGET -H'Content-Type:application/json' http://localhost:9200/potato/_segments?pretty
+
+    [Response]
+    {
+        "_shards" : {
+            "total" : 6,
+            "successful" : 3,
+            "failed" : 0
+        },
+        "indices" : {
+            "potato" : {
+            "shards" : {
+                "0" : [
+                {
+                    "routing" : {
+                    "state" : "STARTED",
+                    "primary" : true,
+                    "node" : "_s0qVk3MTXCcj1dhm8YFqw"
+                    },
+                    "num_committed_segments" : 0,
+                    "num_search_segments" : 0,
+                    "segments" : { }
+                }
+                ], 
+                "1" : [
+                {
+                    "routing" : {
+                    "state" : "STARTED",
+                    "primary" : true,
+                    "node" : "_s0qVk3MTXCcj1dhm8YFqw"
+                    },
+                    "num_committed_segments" : 0,
+                    "num_search_segments" : 0,
+                    "segments" : { }
+                }
+                ],
+                "2" : [
+                {
+                    "routing" : {
+                    "state" : "STARTED",
+                    "primary" : true,
+                    "node" : "_s0qVk3MTXCcj1dhm8YFqw"
+                    },
+                    "num_committed_segments" : 0,
+                    "num_search_segments" : 0,
+                    "segments" : { }
+                }
+                ]
+                }
+            }
+        }
+    }
+    ```
+
+#### 6. _cat인덱스들의 상태 모니터링
+- _cat/indices/?v 모든 index의 모니터링 정보
+- _cat/indices/{indexname}?v 지정된 index의 모니터링 정보
+  
+    **GET {index}/_stats** 
+    ```
+    [Request]
+    $ curl -XGET -H'Content-Type:application/json' http://localhost:9200/_cat/indices?v
+    
+    [Response]
+    health status index  uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+    yellow open   potato ZB8yxCJ3TcKxq_SyC9L0XQ   3   1          0            0       783b           783b
+    ```
+
+#### 7. _cat인덱스들의 상태 모니터링
+- _cat/indices/?v 모든 index의 모니터링 정보
+- _cat/indices/{indexname}?v 지정된 index의 모니터링 정보
+  
+    **GET {index}/_stats** 
+    ```
+    [Request]
+    $ curl -XGET -H'Content-Type:application/json' http://localhost:9200/_cat/indices?v
+    
+    [Response]
+    health status index  uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+    yellow open   potato ZB8yxCJ3TcKxq_SyC9L0XQ   3   1          0            0       783b           783b
     ```
